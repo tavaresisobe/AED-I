@@ -164,4 +164,48 @@ int main(){
   }*/
     return 0 ; 
 }
+#include <stdio.h>
+#include <stdlib.h>
+/*1 = feminino
+0 = masculino*/
 
+typedef struct{
+  int num ; 
+  double numUSA ;
+  int genero ;
+}Sapato ;
+
+void feminino(int a){
+  printf("%d\n", a) ;
+  float convert = (((230 + 19)/25.4) * 3) - 23 ;
+  printf("F %.2lf\n", convert) ;
+}
+
+void masculino(int b){ 
+  printf("%d\n", b) ;
+  float convert = (((b + 19)/25.4) * 3) - 24 ;
+  printf("M %.2lf\n", convert) ;
+}
+
+int main(){
+  float = num_mm_homens[] = {23, 23.5, 24.5, 25.5, 26, 27, 27.5, 28.5, 29.5, 30, 30.5} ;
+  float = num_mm_mulheres[] = {23, 23.5, 24, 25, 26, 27, 27.5} ;
+  int l[] = {3, 35, 1, 40, 1, 40, 1} ;
+  int i, j, teste, size = 0 ; 
+  teste = l[0] ;
+  Sapato lista[teste] ;
+  size = sizeof(l) / sizeof(l[0]) ;
+  for (j = 0, i = 2 ; j < teste, i <= size ; j++, i += 2){
+    if (l[i] == 1){
+      lista[j].genero = 1 ;
+      lista[j].num = l[i-1] ;
+      feminino(lista[j].num) ;
+    }else
+    if (l[i] == 0){
+      lista[j].genero = 0 ;
+      lista[j].num = l[i-1] ;
+      masculino(lista[j].num) ;
+    }
+  }
+  return 0 ; 
+}
