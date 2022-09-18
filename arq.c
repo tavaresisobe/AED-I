@@ -23,10 +23,10 @@ float feminino(float a){
   if (f >= 0.0 && f <= 0.20){    //se vd > 0,8
       return ceil(converte) ;
   }else
-  if (f >= 0.21 && f <= 0.6){    //se 0,4 <= vd < 0,8
+  if (f > 0.20 && f <= 0.6){    //se 0,4 <= vd < 0,8
       return floor(converte) + 0.5 ;
   }else
-  if (f >= 0.61 && f <= 1){    //se 0 <= vd < 0,4
+  if (f > 0.60 && f <= 1){    //se 0 <= vd < 0,4
        return floor(converte) ;
   }
 }
