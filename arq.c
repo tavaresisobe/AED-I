@@ -8,7 +8,7 @@ typedef struct{
   int numM[100] ;
   int qtdM[100] ; 
   float numUSA_M[100] ;
-}SapatoM ;
+}SapatoM;
 
 typedef struct{
   int numF[100] ;
