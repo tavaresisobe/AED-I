@@ -21,10 +21,10 @@ float feminino(float a){
       return ceil(converte) ;
   }else
   if (f > 0.21 && f <= 0.6){    //se 0,4 <= vd < 0,8
-      return round(converte) + 0.5 ;
+      return floor(converte) + 0.5 ;
   }else
   if (f > 0.61 && f <= 1){    //se 0 <= vd < 0,4
-       return round(converte) ;
+       return floor(converte) ;
   }
 }
 
@@ -33,7 +33,6 @@ float masculino(int b){
   float m = ceil(converte) ;
   m = m - converte ;
   if (m >= 0.0 && m <= 0.20){    //se vd > 0,8
-      printf("M %.2lf\n", converte) ;
       return ceil(converte) ;
   }else
   if (m > 0.21 && m <= 0.6){    //se 0,4 <= vd < 0,8
@@ -48,20 +47,20 @@ int main(void) {
   SapatoM lista_M ;
   SapatoF lista_F ;
   
-  int l[7] = {3,35,1,40,1,40,1} ;
+  int l[9] = {4,37,0,42,0,36,1, 40, 0} ;
   int i, j, test = l[0], countF = 0, countM = 0 ;
   
-  for (j = 0, i = 2 ; j < 7, i < 7 ; j++, i += 2){
+  for (i = 2 ; i < 9 ; i += 2){
     if (l[i] == 1){
-        lista_F.numF[j] = l[i-1] ;
-        lista_F.numUSA_F[j] = feminino(lista_F.numF[j]) ;
-        lista_F.qtdF[j] = 1 ;
+        lista_F.numF[countF] = l[i-1] ;
+        lista_F.numUSA_F[countF] = feminino(lista_F.numF[countF]) ;
+        lista_F.qtdF[countF] = 1 ;
         countF += 1 ;
     }else
     if (l[i] == 0){
-        lista_M.numM[j] = l[i-1] ;
-        lista_M.numUSA_M[j] = masculino(lista_M.numM[j]) ;
-        lista_M.qtdM[j] = 1 ;
+        lista_M.numM[countM] = l[i-1] ;
+        lista_M.numUSA_M[countM] = masculino(lista_M.numM[countM]) ;
+        lista_M.qtdM[countM] = 1 ;
         countM += 1 ;
     }
   }
@@ -72,12 +71,13 @@ int main(void) {
   {
       printf ("%.1f-(%d) ", lista_F.numUSA_F[i], lista_F.qtdF[i]) ;
   }
+  printf ("\n") ;
   if (countM > 0){
       printf ("M ") ;
   }
   for (i = 0 ; i < countM ; i++)
   {
-      printf ("%.1f-(%d)\n ", lista_M.numUSA_M[i], lista_M.qtdM[i]) ;
+      printf ("%.1f-(%d) ", lista_M.numUSA_M[i], lista_M.qtdM[i]) ;
   }
   
   return 0 ;
