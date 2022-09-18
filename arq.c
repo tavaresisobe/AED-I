@@ -23,10 +23,10 @@ float feminino(float a){
   if (f >= 0.0 && f <= 0.20){    //se vd > 0,8
       return ceil(converte) ;
   }else
-  if (f > 0.21 && f <= 0.6){    //se 0,4 <= vd < 0,8
+  if (f >= 0.21 && f <= 0.6){    //se 0,4 <= vd < 0,8
       return floor(converte) + 0.5 ;
   }else
-  if (f > 0.61 && f <= 1){    //se 0 <= vd < 0,4
+  if (f >= 0.61 && f <= 1){    //se 0 <= vd < 0,4
        return floor(converte) ;
   }
 }
@@ -37,18 +37,18 @@ float masculino(int b){
   if (m >= 0.0 && m <= 0.20){    //se vd > 0,8
       return ceil(converte) ;
   }else
-  if (m > 0.21 && m <= 0.6){    //se 0,4 <= vd < 0,8
+  if (m > 0.20 && m <= 0.6){    //se 0,4 <= vd < 0,8
       return floor(converte) + 0.5 ;
   }else
-  if (m > 0.61 && m <= 1){    //se 0 <= vd < 0,4
-       return floor(converte) ;
+  if (m > 0.60 && m <= 1){    //se 0 <= vd < 0,4
+      return floor(converte) ;
   }
 }
 int main(void) {
   SapatoM lista_M ;
   SapatoF lista_F ;
   int l[100] ;
-  int i, j, test, countF = 0, countM = 0, auxF = 0, auxM = 0 ;
+  int i, j, test, countF = 0, countM = 0, auxF = 0, auxM = 0, bug ;
   //lendo vetor 1<=L<100 com nmero de testes e pares (N,G)
   for (i = 0 ; i < 100 ; i++){  
       scanf ("%d", &l[i]) ;
@@ -70,6 +70,7 @@ int main(void) {
         if (l[i-1] == auxM){
             lista_M.qtdM[countM-1] += 1 ;
         }else{
+           // bug = l[i-1] ;
             lista_M.numM[countM] = l[i-1] ;
             lista_M.numUSA_M[countM] = masculino(lista_M.numM[countM]) ;
             lista_M.qtdM[countM] = 1 ;
