@@ -70,7 +70,6 @@ int main(void) {
         if (l[i-1] == auxM){
             lista_M.qtdM[countM-1] += 1 ;
         }else{
-           // bug = l[i-1] ;
             lista_M.numM[countM] = l[i-1] ;
             lista_M.numUSA_M[countM] = masculino(lista_M.numM[countM]) ;
             lista_M.qtdM[countM] = 1 ;
