@@ -101,16 +101,16 @@ int main(void) {
           if (l[i-1] >= 35 && l[i-1] <= 45)
           {
               F.numF[countF] = l[i-1] ;
+              countF ++ ;
           }
-          countF ++ ;
       }else
       if (l[i] == 0)
       {
           if (l[i-1] >= 35 && l[i-1] <= 45)
           {
               M.numM[countM] = l[i-1] ;
-          }
-          countM ++ ;
+              countM ++ ;
+          }    
       }
   }
     if (countF > 0)
