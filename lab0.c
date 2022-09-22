@@ -1,6 +1,11 @@
+/* Gustavo Henrique Tavares Isobe - RA: 158552
+   Data: 22/09/2022
+   AED I - exercício lab 0*/ 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+
 typedef struct{
   int numM[100] ;
   int qtdM[100] ; 
@@ -20,7 +25,7 @@ float feminino(float a){
   if (f >= 0.0 && f <= 0.20){    //se vd > 0,8
       return ceil(converte) ;
   }else
-  if (f > 0.20 && f <= 0.6){    //se 0,4 <= vd < 0,8
+  if (f > 0.20 && f <= 0.60){    //se 0,4 <= vd < 0,8
       return floor(converte) + 0.5 ;
   }else
   if (f > 0.60 && f <= 1){    //se 0 <= vd < 0,4
@@ -41,79 +46,199 @@ float masculino(int b){
       return floor(converte) ;
   }
 }
+
+void imprime_f (SapatoF f, int count)
+{
+    int i, j, qtd = 1 ;
+    printf ("F ") ;
+    for (i = 0 ; i < count ; i++)
+    {
+        for (j = i + 1 ; j < count ; j++)
+        {
+            if (f.numUSA_F[i] == f.numUSA_F[j])
+            {
+                qtd ++ ;
+                i++ ;
+            }
+        }
+        printf("%.1f-(%d) ", f.numUSA_F[i], qtd) ;
+        qtd = 1 ;
+    }
+}
+
+void imprime_m (SapatoM M, int count)
+{
+    int i, j, qtd = 1 ;
+    printf ("M ") ;
+    for (i = 0 ; i < count ; i++)
+    {
+        for (j = i + 1 ; j < count ; j++)
+        {
+            if (M.numUSA_M[i] == M.numUSA_M[j])
+            {
+                qtd += 1 ;
+                i++ ;
+            }
+        }
+        printf("%.1f-(%d) ", M.numUSA_M[i], qtd) ;
+        qtd = 1 ;
+    }
+}
+
 int main(void) {
-  SapatoM lista_M ;
-  SapatoF lista_F ;
-  int l[100] ;
-  int i, j, test, countF = 0, countM = 0, auxF = 0, auxM = 0 ;
+  SapatoM M ;
+  SapatoF F ;
+  
+  int i, j, test, countF = 0, countM = 0 ;
   float aux ;
-  //lendo vetor 1<=L<100 com nmero de testes e pares (N,G)
-  for (i = 0 ; i < 100 ; i++){  
+  scanf ("%d", &test) ;
+ 
+  int l[test*2] ;
+  
+  for (i = 0 ; i < test * 2 ; i++)
+  {  
       scanf ("%d", &l[i]) ;
   }
-  test = l[0] ; //n de testes
-  for (i = 2 ; i <= test * 2 ; i += 2){  //verificando se N vai pertencer a estrutura F ou M 
-    if (l[i] == 1){  //G = 1 FEMININO
-        if (l[i-1] == auxF){
-            lista_F.qtdF[countF-1] += 1 ;
-        }else{
-            lista_F.numF[countF] = l[i-1] ;
-            lista_F.numUSA_F[countF] = feminino(lista_F.numF[countF]) ;
-            lista_F.qtdF[countF] = 1 ;
-            auxF = lista_F.numF[countF] ;
-            countF += 1 ;
-        }
-    }else
-    if (l[i] == 0){  //G = 0 MASCULINO
-        if (l[i-1] == auxM){
-            lista_M.qtdM[countM-1] += 1 ;
-        }else{
-            lista_M.numM[countM] = l[i-1] ;
-            lista_M.numUSA_M[countM] = masculino(lista_M.numM[countM]) ;
-            lista_M.qtdM[countM] = 1 ;
-            auxM = lista_M.numM[countM] ;
-            countM += 1 ;
-        }
-    }
+  for (i = 1 ; i <= test * 2 ; i += 2)
+  {
+      if (l[i] == 1)
+      {
+          if (l[i-1] >= 35 && l[i-1] <= 45)
+          {
+              F.numF[countF] = l[i-1] ;
+              countF ++ ;
+          }
+      }else
+      if (l[i] == 0)
+      {
+          if (l[i-1] >= 35 && l[i-1] <= 45)
+          {
+              M.numM[countM] = l[i-1] ;
+              countM ++ ;
+          }
+      }
   }
-  //gambiarra (para impressão) nas próximas linhas:
-  if (countF > 0){
-      printf ("F ") ;
-    for (i = 0 ; i < countF ; i++){
-        for (j = 0 ; j < countF ; j++){
-             if (lista_F.numUSA_F[i] < lista_F.numUSA_F[j]){
-                 aux = lista_F.numUSA_F[i] ;
-                 lista_F.numUSA_F[i] = lista_F.numUSA_F[j] ;
-                 lista_F.numUSA_F[j] = aux ;
-                 aux = lista_F.qtdF[i] ;
-                 lista_F.qtdF[i] = lista_F.qtdF[j] ;
-                 lista_F.qtdF[j] = aux ;
-             }
+    if (countF > 0)
+    {
+        aux = 0 ;
+        for (i = 0 ; i < countF ; i++)
+        {
+            F.numUSA_F[i] = feminino(F.numF[i]) ;
         }
-    }
-    for (i = 0 ; i < countF ; i++){
-      printf ("%.1f-(%d) ", lista_F.numUSA_F[i], lista_F.qtdF[i]) ;
-    }  
-    printf ("\n") ;
-  }
-  if (countM > 0){
-      printf ("M ") ;
-    aux = 0.0 ;
-    for (i = 0 ; i < countM ; i++){
-        for (j = 0 ; j < countM ; j++){
-             if (lista_M.numUSA_M[i] < lista_M.numUSA_M[j]){
-                 aux = lista_M.numUSA_M[i] ;
-                 lista_M.numUSA_M[i] = lista_M.numUSA_M[j] ;
-                 lista_M.numUSA_M[j] = aux ;
-                 aux = lista_M.qtdM[i] ;
-                 lista_M.qtdM[i] = lista_M.qtdM[j] ;
-                 lista_M.qtdM[j] = aux ;
-             }
+
+        for (i = 0 ; i < countF ; i++)
+        {  
+            for (j = i + 1 ; j < countF ; j++)
+            {
+                if (F.numUSA_F[i] > F.numUSA_F[j])
+                {
+                    aux = F.numUSA_F[i] ;
+                    F.numUSA_F[i] = F.numUSA_F[j] ;
+                    F.numUSA_F[j] = aux ;
+                }
+            }
         }
+        imprime_f (F, countF) ;
+        printf("\n") ;
     }
-    for (i = 0 ; i < countM ; i++){
-        printf ("%.1f-(%d) ", lista_M.numUSA_M[i], lista_M.qtdM[i]) ; ;
+    if (countM > 0)
+    {
+        aux = 0 ;
+        for (i = 0 ; i < countM ; i++)
+        {
+            M.numUSA_M[i] = masculino(M.numM[i]) ;
+        }
+
+        for (i = 0 ; i < countM ; i++)
+        {
+            for (j = i + 1 ; j < countM ; j++)
+            {
+                if (M.numUSA_M[i] > M.numUSA_M[j])
+                {
+                    aux = M.numUSA_M[i] ;
+                    M.numUSA_M[i] = M.numUSA_M[j] ;
+                    M.numUSA_M[j] = aux ;
+                }
+            }
+        }
+        imprime_m (M, countM) ;
     }
-  }
   return 0 ;
-}
+  }
+  
+  /*
+  73
+37 1
+40 0
+39 0
+35 0
+43 1
+40 0
+42 0
+44 1
+39 0
+45 0
+42 1
+42 1
+36 1
+45 0
+40 1
+44 1
+40 1
+42 1
+41 1
+44 1
+41 0
+38 0
+35 0
+44 0
+39 1
+43 0
+36 0
+45 1
+43 0
+45 1
+44 1
+45 0
+42 0
+42 1
+41 0
+44 0
+36 0
+39 0
+41 1
+36 0
+40 1
+45 0
+39 1
+38 1
+45 0
+45 0
+37 0
+38 1
+43 0
+45 0
+44 1
+39 1
+45 0
+41 0
+41 1
+40 0
+45 0
+37 0
+35 0
+45 0
+42 1
+41 1
+41 0
+40 1
+37 0
+45 1
+45 0
+43 1
+36 1
+44 0
+35 0
+35 0
+43 0
+  */
