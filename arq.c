@@ -1,3 +1,5 @@
+/*http://www.ic.uff.br/~ccaetano/aulas/PROG1_17_Arquivos_em_C.pdf*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX 3
