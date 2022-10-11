@@ -3,6 +3,8 @@
    Versão 10/10/2022 22:35
 */
 
+https://wagnergaspar.com/lista-encadeada-com-a-linguagem-c/
+
 
 // ##################### Bibliotecas Externas ##############################
 
