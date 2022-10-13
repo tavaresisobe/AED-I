@@ -1,3 +1,4 @@
+/*
 /* Programa: Laboratório 2
    Autor: Gustavo Henrique Tavares Isobe
    Versao: 1.0 - 13/10/2022
@@ -80,3 +81,4 @@ int main ()
     
     return 0 ;
 }
+*/
