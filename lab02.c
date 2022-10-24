@@ -1,3 +1,7 @@
+/*http://www.sergioportari.com.br/wp-content/uploads/2018/11/aula06-Listas-encadeada.pdf
+http://www.sergioportari.com.br/wp-content/uploads/2018/10/aula05-Listas-estaticas.pdf
+https://www.sergioportari.com.br/aulas/2018-2/uemg-frutal/algoritmos-e-estruturas-de-dados-aed/
+*/
 /* Programa: Laboratório 2
    Autor: Gustavo Henrique Tavares Isobe
    Versao: 1.0 - 13/10/2022
