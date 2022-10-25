@@ -1,6 +1,6 @@
 /* Programa: Laboratório 2
    Autor: Gustavo Henrique Tavares Isobe
-   Versao: 1.0 - 25/10/2022 - 15:45h
+   Versao: 1.0 - 25/10/2022 - 15:53h
 */
 
 // ##################### Bibliotecas Externas ##############################
