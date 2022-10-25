@@ -5,7 +5,7 @@ https://www.sergioportari.com.br/aulas/2018-2/uemg-frutal/algoritmos-e-estrutura
 
 /* Programa: Laboratório 2
    Autor: Gustavo Henrique Tavares Isobe
-   Versao: 1.0 - 13/10/2022
+   Versao: 1.0 - 25/10/2022 - 15:36h
 */
 
 // ##################### Bibliotecas Externas ##############################
