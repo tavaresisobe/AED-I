@@ -1,6 +1,6 @@
 /* Programa: Laboratório 2
    Autor: Gustavo Henrique Tavares Isobe
-   Versao: 1.0 - 27/10/2022 - 01:06h
+   Versao: 1.0 - 27/10/2022 - 20:54h
 */
 
 // ##################### Bibliotecas Externas ##############################
@@ -58,7 +58,6 @@ void insereElementoOrdenado (tipoListaEE *l, int posicao, int *limite)
         l->tamanhoLista++ ;
         l->posLivre[posicao] = 0 ;
         *limite += 1 ;
-        printf("limite: %d\n", *limite) ;
       }else if (l->elemento[posicao].valor > l->elemento[l->ultimo].valor)
       {     
         l->elemento[l->ultimo].prox = posicao ;
@@ -67,7 +66,6 @@ void insereElementoOrdenado (tipoListaEE *l, int posicao, int *limite)
         l->posLivre[posicao] = 0 ;
         l->ultimo = posicao ;
         *limite += 1 ;
-        printf("limite: %d\n", *limite) ;
       }else if (l->elemento[posicao].valor < l->elemento[l->primeiro].valor)  //caso seja menor que o primeiro
       {
         l->elemento[posicao].prox = l->primeiro ;
@@ -75,7 +73,6 @@ void insereElementoOrdenado (tipoListaEE *l, int posicao, int *limite)
         l->posLivre[posicao] = 0 ;
         l->primeiro = posicao ;
         *limite += 1 ;
-        printf("limite: %d\n", *limite) ;
       }else  //insercao intermediaria ordenada
       {
         int i = 0 ;
@@ -90,7 +87,6 @@ void insereElementoOrdenado (tipoListaEE *l, int posicao, int *limite)
             l->tamanhoLista++ ;
             l->posLivre[posicao] = 0 ;
             *limite += 1 ;
-            printf("limite: %d\n", *limite) ;
             break ;
           }else
             back = next ;
@@ -120,7 +116,6 @@ void removerElemento (tipoListaEE *l, int *limite)
         l->primeiro = g ;
         *limite -= 1 ;
         achou = 1 ;
-        printf("limite: %d\n", *limite) ;
       }else
         if (x == l->elemento[l->ultimo].valor) //removendo ultimo
         {
@@ -136,7 +131,6 @@ void removerElemento (tipoListaEE *l, int *limite)
               l->elemento[l->ultimo].prox = -1 ;
               *limite -= 1 ;
               achou = 1 ;
-              printf("limite: %d\n", *limite) ;
               break ;
             }else
               ant = suc ;
@@ -157,7 +151,6 @@ void removerElemento (tipoListaEE *l, int *limite)
               l->tamanhoLista -- ;
               *limite -= 1 ;
               achou = 1 ;
-              printf("limite: %d\n", *limite) ;
               break ;
             }else
               back = next ;
@@ -168,7 +161,7 @@ void removerElemento (tipoListaEE *l, int *limite)
     }
     if (achou == 0)
     {
-      printf("Nao existe\n") ;
+      printf("nao existe\n") ;
     }
 }
 
