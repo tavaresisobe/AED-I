@@ -1,11 +1,6 @@
-/*http://www.sergioportari.com.br/wp-content/uploads/2018/11/aula06-Listas-encadeada.pdf
-http://www.sergioportari.com.br/wp-content/uploads/2018/10/aula05-Listas-estaticas.pdf
-https://www.sergioportari.com.br/aulas/2018-2/uemg-frutal/algoritmos-e-estruturas-de-dados-aed/
-*/
-
 /* Programa: Laboratório 2
    Autor: Gustavo Henrique Tavares Isobe
-   Versao: 1.0 - 25/10/2022 - 15:36h
+   Versao: 1.0 - 26/10/2022 - 22:46h
 */
 
 // ##################### Bibliotecas Externas ##############################
@@ -33,92 +28,133 @@ struct listaEE
 };
 typedef struct listaEE tipoListaEE;
 
-void inicializaLista (tipoListaEE *listaAux, int t)
+void inicializaLista (tipoListaEE *l, int t)
 {
-    listaAux->tamanhoLista = 0 ;
-    listaAux->primeiro = -1 ;
-    listaAux->ultimo = -1;
+    l->tamanhoLista = 0 ;
+    l->primeiro = -1 ;
+    l->ultimo = -1;
     for (int i = 0 ; i < t ; i++)
     {
-        listaAux->elemento[i].valor = 0 ;
-        listaAux->elemento[i].prox = -1 ;
-        listaAux-> posLivre[i] = 1 ; 
+        l->elemento[i].valor = 0 ;
+        l->elemento[i].prox = -1 ;
+        l-> posLivre[i] = 1 ; 
     }
 }
 
-void insereElementoOrdenado (tipoListaEE *listaAux, int posicao)
+void insereElementoOrdenado (tipoListaEE *l, int posicao)
 {
   int x ;
   scanf("%d", &x) ;
   if (posicao != -1 && x >= 60000 && x<= 140000)
   {
-    listaAux->elemento[posicao].valor = x ;
-    if (listaAux->tamanhoLista == 0) //caso seja o 1a
+    l->elemento[posicao].valor = x ;
+    if (l->tamanhoLista == 0) //caso seja o 1a
     {
-      listaAux->primeiro = posicao ;
-      listaAux->ultimo = posicao ;
-      listaAux->elemento[posicao].prox = -1 ;
-      listaAux->tamanhoLista++ ;
-      listaAux->posLivre[posicao] = 0 ;
-      printf("inseriu o primeiro elemento\n") ;
-    }else if (listaAux->tamanhoLista > 0 && listaAux->elemento[posicao].valor > listaAux->elemento[listaAux->ultimo].valor){ //caso seja maior que o ultimo                 
-      listaAux->elemento[listaAux->ultimo].prox = posicao ;
-      listaAux->tamanhoLista++ ;
-      listaAux->elemento[posicao].prox = -1 ;
-      listaAux->posLivre[posicao] = 0 ;
-      listaAux->ultimo = posicao ;
-      printf ("Inseriu no ultimo\n") ;
-    }else if (listaAux->tamanhoLista > 0 && listaAux->elemento[posicao].valor < listaAux->elemento[listaAux->primeiro].valor){  //caso seja menor que o primeiro
-      listaAux->elemento[posicao].prox = listaAux->primeiro ;
-      listaAux->tamanhoLista++ ;
-      listaAux->posLivre[posicao] = 0 ;
-      listaAux->primeiro = posicao ;
-      printf ("Inseriu no primeiro\n") ;
-    }else if (listaAux->tamanhoLista > 1){  //insercao intermediaria ordenada
-      int aux ;
-      for (int i = 0 ; i < listaAux->tamanhoLista ; i++)
-      { 
-        if (listaAux->elemento[posicao].valor > listaAux->elemento[i].valor)
+      l->primeiro = posicao ;  //atualizando encadeamento
+      l->ultimo = posicao ;
+      l->elemento[posicao].prox = -1 ;
+      l->tamanhoLista++ ;
+      l->posLivre[posicao] = 0 ;
+    }else if (l->elemento[posicao].valor > l->elemento[l->ultimo].valor)  //caso seja maior que o ultimo
+    {     
+      l->elemento[l->ultimo].prox = posicao ;  //atualizando encadeamento
+      l->tamanhoLista++ ;
+      l->elemento[posicao].prox = -1 ;
+      l->posLivre[posicao] = 0 ;
+      l->ultimo = posicao ;
+    }else if (l->elemento[posicao].valor < l->elemento[l->primeiro].valor)  //caso seja menor que o primeiro
+    {
+      l->elemento[posicao].prox = l->primeiro ;
+      l->tamanhoLista++ ;
+      l->posLivre[posicao] = 0 ;
+      l->primeiro = posicao ;
+    }else  //insercao intermediaria ordenada
+    {
+      int i = 0 ;
+      int back = l->primeiro ;
+      int next = l->elemento[l->primeiro].prox ;
+      while (i < l->tamanhoLista)
+      {
+        if (l->elemento[posicao].valor < l->elemento[next].valor)
         {
-          aux = listaAux->elemento[i].prox ;
-          if (listaAux->elemento[aux].valor > listaAux->elemento[posicao].valor)
-          {
-            listaAux->elemento[i].prox = posicao ;
-            listaAux->elemento[posicao].prox = aux ;
-            listaAux->tamanhoLista++ ;
-            listaAux->posLivre[posicao] = 0 ;
-            break ;
-          }
-        }
+          l->elemento[back].prox = posicao ;  //atualiza encadeamento
+          l->elemento[posicao].prox = next ;
+          l->tamanhoLista++ ;
+          l->posLivre[posicao] = 0 ;
+          break ;
+        }else
+          back = next ;
+          next = l->elemento[next].prox ;
+          i ++ ;
       }
     }
   }else
       printf ("Nao existe\n") ;
 }
 
-/*void removerElemento (tipoListaEE *listaAux, int t)
+void removerElemento (tipoListaEE *l)
 {
-    int x, i, tam ;
+    int i = 0, x ;
     scanf ("%d", &x) ;
     if (x >= 60000 && x <= 140000)
     {
-        tam = listaAux->tamanhoLista ; 
-        while(tam > 0)
+      if (x == l->elemento[l->primeiro].valor) //removendo 1o elemento
+      {
+        int g = l->elemento[l->primeiro].prox  ;
+        l->posLivre[l->primeiro] = 1 ;
+        l->elemento[l->primeiro].valor = 0 ;
+        l->elemento[l->primeiro].prox = -1 ;
+        l->tamanhoLista -- ;
+        l->primeiro = g ;
+          
+      }else
+        if (x == l->elemento[l->ultimo].valor) //removendo ultimo
         {
-            if ()
-            
-            
-            tam -- ;
+          int ant = l->primeiro, suc = l->elemento[l->primeiro].prox ;
+          for (int j = 0 ; j < l->tamanhoLista ; j++)  //buscando penultimo elemento da lista
+          {
+              if (l->elemento[suc].prox == l->ultimo){
+                break ;
+              }else
+                ant = suc ;
+                suc = l->elemento[suc].prox ;
+          }
+          l->posLivre[l->ultimo] = 1 ;
+          l->elemento[l->ultimo].valor = 0 ;
+          l->elemento[l->ultimo].prox = -1 ; //talvez nao funcione
+          l->tamanhoLista -- ;
+          l->ultimo = ant ;
+          l->elemento[l->ultimo].prox = -1 ;
+          
+        }else
+        {
+          int back = l->primeiro ;
+          int next = l->elemento[l->primeiro].prox ;
+          while(i < l->tamanhoLista) //removendo elemento intermediario da lista
+          {
+            if (x == l->elemento[next].valor)
+            {
+              l->elemento[back].prox = l->elemento[next].prox ;
+              l->elemento[next].valor = 0 ;
+              l->elemento[next].prox = -1 ;
+              l->posLivre[next] = 1 ;
+              l->tamanhoLista -- ;
+              break ;
+            }else
+              back = next ;
+              next = l->elemento[next].prox ;
+              i ++ ;
+          }
         }
     }else
-        prinf ("Nao existe\n") ;
-}*/
+        printf("Nao existe\n") ;
+}
 
-int proxPosLivre(tipoListaEE *listaAux, int t)
+int proxPosLivre(tipoListaEE *l, int t)
 {
     for (int i = 0 ; i < t ; i++)
     {
-        if (listaAux->posLivre[i] == 1)
+        if (l->posLivre[i] == 1)
             return i ;
     }
     return -1;
@@ -127,7 +163,7 @@ int proxPosLivre(tipoListaEE *listaAux, int t)
 //por ultimo:
 void imprimeListaEE (tipoListaEE *l)
 {
-  int i = 0, aux = l->primeiro, tam = l->tamanhoLista ;
+  int aux = l->primeiro, tam = l->tamanhoLista ;
   while (tam > 0)
   {
     printf ("%d ", l->elemento[aux].valor) ;
@@ -139,7 +175,7 @@ void imprimeListaEE (tipoListaEE *l)
 
 // ###################### Funcoes e Procedimentos do programa ##############
 
-void ano_de_ingresso(tipoListaEE *listaAux)
+void ano_de_ingresso(tipoListaEE *l)
 {
   //printar ano de ingresso e qtd.
 }
@@ -152,7 +188,6 @@ int main ()
   tipoListaEE listaEE ;
   int t, i, aux, operacao ;
   scanf ("%d", &t) ;
-  t = t * 2 ;
   if (t > 0)
   {
     inicializaLista(&listaEE, t) ;
@@ -165,130 +200,12 @@ int main ()
         insereElementoOrdenado(&listaEE, aux) ;
         imprimeListaEE(&listaEE) ;
       }else if (operacao == 2){
-            //removerElemento(&listaEE, t) ;
+        removerElemento(&listaEE) ;
       }
     }
     ano_de_ingresso(&listaEE) ;
   }else
     ano_de_ingresso(&listaEE) ;
-    
-    return 0 ;
-}
-
-/* Programa: Laboratório 2
-   Autor: Gustavo Henrique Tavares Isobe
-   Versao: 1.0 - 13/10/2022
-*/
-
-// ##################### Bibliotecas Externas ##############################
- 
-#include<stdio.h>
-#include<stdlib.h> 
-#define MAX 100
-
-// ########################## TAD X.h ######################################
-
-struct info
-{
-    int valor;
-    int prox;
-};
-typedef struct info tipoInfo;
-
-struct listaEE
-{
-    int tamanhoLista;
-    int primeiro ;
-    int ultimo ;
-    int posLivre[MAX];
-    tipoInfo elemento[MAX];
-};
-typedef struct listaEE tipoListaEE;
-
-void inicializaLista (tipoListaEE *listaAux, int t)
-{
-    listaAux->tamanhoLista = 0 ;
-    listaAux->primeiro = -1 ;
-    listaAux->ultimo = -1;
-    for (int i = 0 ; i < t ; i++)
-    {
-        listaAux->elemento[i].valor = 0 ;
-        listaAux->elemento[i].prox = -1 ;
-        listaAux-> posLivre[i] = 1 ; 
-    }
-}
-
-void insereElementoFinal (tipoListaEE *listaAux, int posicao)
-{ 
-    if (posicao != -1)
-    {
-        scanf("%d", &listaAux->elemento[posicao].valor) ;
-        if (listaAux->tamanhoLista == 0)  //atualizando dados do nó da lista
-            listaAux->primeiro = posicao ;
-        else listaAux->elemento[listaAux->ultimo].prox = posicao ;
-        listaAux->elemento[posicao].prox = -1 ;
-        listaAux->tamanhoLista++ ;
-        listaAux->ultimo = posicao ;
-        listaAux->posLivre[posicao] = 0 ;
-        printf ("Deu certo\n") ;
-    }
-}
-
-int proxPosLivre(tipoListaEE *listaAux, int t)
-{
-    for (int i = 0 ; i < t ; i++)
-    {
-        if (listaAux->posLivre[i] == 1)
-            return i ;
-    }
-    return -1;
-}
-
-
-
-//por ultimo:
-void imprimeLista (tipoListaEE *l)
-{
-  tipoListaEE *p ;
-  int i = 0 ;
-  for (p = l; p != NULL ; p = p->elemento[i].prox)
-  {
-    printf("info = %d\n", p->elemento[i].valor) ;
-    i++ ;
-  }
-}
-
-// ###################### Funcoes e Procedimentos do programa ##############
-
-void ano_de_ingresso()
-{
-  //printar ano de ingresso e qtd.
-}
-
-// ############################ Principal ###################################
-
-int main ()
-{
-  tipoInfo noListaEE ;
-  tipoListaEE listaEE ;
-  int t, i, aux, operacao ;
-  scanf ("%d", &t) ;
-  t = t * 2 ;
-  if (t > 0)
-  {
-    inicializaLista(&listaEE, t) ;
-    for (i = 0 ; i < t ; i++)
-    {
-      scanf("%d", &operacao) ;
-      if (operacao == 1){
-        aux = proxPosLivre(&listaEE, t) ;
-        insereElementoFinal(&listaEE, aux) ;
-      }else if (operacao == 2){
-            printf("Retirar\n") ;
-      }
-    }
-  }else
-    printf ("Nao\n") ;
     
     return 0 ;
 }
