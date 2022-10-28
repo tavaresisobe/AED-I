@@ -1,6 +1,6 @@
 /* Programa: Laboratório 2
    Autor: Gustavo Henrique Tavares Isobe
-   Versao: 1.0 - 27/10/2022 - 20:54h
+   Versao: 1.0 - 28/10/2022 - 01:01h
 */
 
 // ##################### Bibliotecas Externas ##############################
@@ -59,7 +59,7 @@ void insereElementoOrdenado (tipoListaEE *l, int posicao, int *limite)
         l->posLivre[posicao] = 0 ;
         *limite += 1 ;
       }else if (l->elemento[posicao].valor > l->elemento[l->ultimo].valor)
-      {     
+      {
         l->elemento[l->ultimo].prox = posicao ;
         l->tamanhoLista++ ;
         l->elemento[posicao].prox = -1 ;
@@ -119,22 +119,24 @@ void removerElemento (tipoListaEE *l, int *limite)
       }else
         if (x == l->elemento[l->ultimo].valor) //removendo ultimo
         {
-          int ant = l->primeiro, suc = l->elemento[l->primeiro].prox ;
-          for (int j = 0 ; j < l->tamanhoLista ; j++)  //buscando penultimo elemento da lista
+          int ant = l->primeiro ;
+          int suc = l->elemento[l->primeiro].prox ;
+          while (i < l->tamanhoLista)  //buscando penultimo elemento da lista
           {
             if (l->elemento[suc].prox == l->ultimo){
+              l->elemento[l->elemento[ant].prox].prox = -1 ;
               l->posLivre[l->ultimo] = 1 ;
               l->elemento[l->ultimo].valor = 0 ;
               l->elemento[l->ultimo].prox = -1 ;
               l->tamanhoLista -- ;
-              l->ultimo = ant ;
-              l->elemento[l->ultimo].prox = -1 ;
+              l->ultimo = l->elemento[ant].prox ;
               *limite -= 1 ;
               achou = 1 ;
               break ;
             }else
               ant = suc ;
               suc = l->elemento[suc].prox ;
+              i++ ;
             }
         }else
         {
@@ -178,12 +180,12 @@ int proxPosLivre(tipoListaEE *l, int t)
 //por ultimo:
 void imprimeListaEE (tipoListaEE *l)
 {
-  int aux = l->primeiro, tam = l->tamanhoLista ;
-  while (tam > 0)
+  int i = 0, aux = l->primeiro ;
+  while (i < l->tamanhoLista)
   {
     printf ("%d ", l->elemento[aux].valor) ;
     aux = l->elemento[aux].prox ;
-    tam -- ;
+    i ++ ;
   }
   printf("\n") ;
 }
@@ -229,6 +231,7 @@ void ano_de_ingresso(tipoListaEE *l)
       y2018 ++ ;
     }
     j = l->elemento[j].prox ;
+    i++ ;
   }
   printf ("2011: %d\n2012: %d\n2013: %d\n2014: %d\n2015: %d\n2016: %d\n2017: %d\n2018: %d\n", y2011, y2012, y2013, y2014, y2015, y2016, y2017, y2018) ;
 }
@@ -256,8 +259,7 @@ int main ()
         imprimeListaEE(&listaEE) ;
       }
     }
-    ano_de_ingresso(&listaEE) ;
-  }else
+  }
     ano_de_ingresso(&listaEE) ;
     
     return 0 ;
