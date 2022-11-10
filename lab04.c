@@ -350,3 +350,128 @@ int retiraEspecifico(ListaLinearED *lista,int ra){
   }else
     return 0;
 }*/
+#include <stdio.h>
+#include <stdlib.h>
+
+struct elemento {
+int info;
+struct elemento *prox;
+struct elemento *ant;
+};
+
+typedef struct elemento tipoElemento;
+
+struct estruturaLDDE{
+tipoElemento *primeiro;
+tipoElemento *ultimo;
+int tamanhoLista;
+};
+
+typedef struct estruturaLDDE tipoLDDE;
+
+void inicializaLista (tipoLDDE *listaAux)
+{
+  listaAux->primeiro = NULL;
+  listaAux->ultimo = NULL;
+  listaAux->tamanhoLista = 0;
+}
+
+void insereElementoFinal (tipoLDDE *listaAux)
+{ // Alocando espaço para o elemento
+  tipoElemento *novo = (tipoElemento*) malloc(sizeof(tipoElemento));
+  // fazendo leitura dos dados para info
+  scanf("%d", &novo->info);
+  if (listaAux->tamanhoLista == 0){
+    novo->prox = NULL;
+    novo->ant = NULL;
+    listaAux->primeiro=novo;
+    listaAux->ultimo=novo;
+  }else{
+    novo->prox = NULL;
+    novo->ant = listaAux->ultimo;
+    listaAux->ultimo->prox = novo;
+    listaAux->ultimo=novo; 
+    }
+    listaAux->tamanhoLista++; 
+}
+
+void insereJogada(tipoLDDE *listaAux)
+{
+  int posicao ;
+  // Alocando espaço para o elemento
+  tipoElemento *aux, *novo = (tipoElemento*) malloc(sizeof(tipoElemento));
+  // fazendo leitura dos dados para info
+  scanf("%d", &novo->info) ;
+  scanf("%d", &posicao) ;
+  if (posicao == 0){
+    listaAux->primeiro->ant = novo ;
+    novo->prox = NULL;
+    novo->ant = NULL;
+    listaAux->primeiro = novo;
+    listaAux->ultimo = novo;
+  }if (posicao == 9){ //inserindo no ultimo
+    listaAux->ultimo->prox = novo ;
+    novo->prox = NULL;
+    novo->ant = listaAux->ultimo;
+    listaAux->ultimo->prox = novo;
+    listaAux->ultimo = novo; 
+  }else{
+      int i = listaAux->tamanhoLista, aux = listaAux->primeiro->prox ;
+      int count = 1 ;
+      while (i > 0)
+      {
+        if (posicao == count){
+          
+          novo->prox = ;
+          novo->ant = ;
+          break ;
+        }else
+        
+          count++ ;
+          i-- ;
+      }
+    }
+    listaAux->tamanhoLista++;
+}
+
+void checaTripla(tipoLDDE *listaAux)
+{
+  
+}
+
+int checaVencedor(tipoLDDE *listaAux)
+{
+  if (listaAux->tamanhoLista == 0)
+  {
+    printf("ganhou\n") ;
+    return 1 ;
+  }else return 0 ;
+}
+
+void listarLista(tipoLDDE *listaAux)
+{
+  
+}
+
+int main(void) 
+{
+  tipoLDDE listaLDDE ; 
+  tipoElemento lInfo ;
+  inicializaLista (&listaLDDE) ;
+  for (int i = 0 ; i < 9 ; i++)
+  {
+    insereElementoFinal(&listaLDDE) ;  
+  }
+  for (int i = 0 ; i < 5 ; i++)
+  {
+    if (checaVencedor(&listaLDDE) == 0)
+    {
+      insereJogada(&listaLDDE) ;
+      checaTripla(&listaLDDE) ;
+      listarLista(&listaLDDE) ;
+      checaVencedor(&listaLDDE) ;
+    }else checaVencedor(&listaLDDE) ; break ;
+  }
+  
+  return 0;
+  }
