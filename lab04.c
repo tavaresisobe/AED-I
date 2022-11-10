@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+/*https://sites.google.com/site/proffdesiqueiraed/aulas/aula-6---listas-duplamente-encadeadas*/
+/*https://wagnergaspar.com/como-construir-uma-lista-duplamente-encadeada/*/
 struct elemento {
 int info;
 struct elemento *prox;
