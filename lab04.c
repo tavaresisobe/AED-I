@@ -421,12 +421,12 @@ void insereJogada(tipoLDDE *listaAux)
       while (i > 0)
       {
         if (posicao == count){
-          
-          novo->prox = ;
-          novo->ant = ;
+          novo->ant = aux->ant ;
+          aux->ant = novo ;
+          novo->prox = aux ;
           break ;
         }else
-        
+          aux = aux->prox ;
           count++ ;
           i-- ;
       }
