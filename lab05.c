@@ -110,7 +110,7 @@ int main(void) {
 
 #include <stdio.h>
 #include <stdlib.h>
-#define tamanhoMAX 10
+#define tamanhoMAX 100
 //1: inserir elemento
 //2: remover ultimo elemento
 //3: mudar o primeiro elemento para o final
