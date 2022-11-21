@@ -1,6 +1,6 @@
 /* Programa: lab 5
    Autor: Gustavo Henrique Tavares Isobe -  RA: 158552 
-   Versao: 2.0 - 20/11/2022 - 21:38 h
+   Versao: 2.0 - 20/11/2022 - 22:02 h
 */
 
 // ##################### Bibliotecas Externas ##############################
@@ -40,15 +40,16 @@ int filaCheia (tipoFC *filaAux){
     if (((filaAux->ultimo + 1) % tamanhoMAX) == filaAux->primeiro)
         return 1;
     else return 0;
-}  
+}
 
 void insereTarefa (tipoFC *filaAux, int info)
 { 
     if (filaVazia(filaAux) == 1)
-    { filaAux->primeiro = 0 ;
-      filaAux->ultimo = 0 ;
-      filaAux->elementos[0] = info ;
-      filaAux->tamanhofila ++ ;
+    { 
+        filaAux->primeiro = 0 ;
+        filaAux->ultimo = 0 ;
+        filaAux->elementos[0] = info ;
+        filaAux->tamanhofila ++ ;
     }else if (filaCheia(filaAux) == 0){
         int posicao = ((filaAux->ultimo + 1) % tamanhoMAX) ;
         filaAux->elementos[posicao] = info;
@@ -70,7 +71,7 @@ void removerTarefa (tipoFC *filaAux)
             filaAux->primeiro = -1 ;
             filaAux->ultimo = -1 ;
         }else
-            filaAux->primeiro + 1 ;
+            filaAux->primeiro = filaAux-> primeiro + 1 ;
     }else
         printf ("vazia\n") ;
 }
