@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 //Número máximo de elementos
-#define tamanhoMax 5
+#define tamanhoMax 100
 // Estrutura PES
 struct pilha {
   int elementos[tamanhoMax];
@@ -62,3 +62,31 @@ int main ()
   return 0 ;
 }
 
+/*
+
+void bin(tipoPilha *pilhaAux)
+{
+  printf ("\nBinario: \n") ;
+  int i, j, num, count = 0;
+  int bin[tamanhoMax] ;
+  for (i = 0 ; i <= pilhaAux->topo ; i++)
+  {
+    count = 0 ;
+    num = pilhaAux->elementos[i] ;
+    if (num == 0)
+      bin[count] = 0 ;
+    else{
+      while(num > 0){
+		    // obtém o resto da divisão de num por 2
+		    bin[count] = num % 2;
+		    count++;
+		    num = num / 2;
+      }
+    }
+    for (j = count ; j > 0 ; j --)
+    {
+      printf ("%d", bin[j]) ;
+    }
+    printf ("\n") ;
+  }
+}*/
