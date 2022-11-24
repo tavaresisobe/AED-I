@@ -90,3 +90,30 @@ void bin(tipoPilha *pilhaAux)
     printf ("\n") ;
   }
 }*/
+
+/*
+#include <stdio.h>
+
+int main ()
+{
+    int x, i, count = 0 ;
+    int vet[50] ;
+    scanf ("%d", &x) ;
+    printf ("%d em binario eh: ", x) ;
+    if (x == 0)
+        vet[count] = 0 ;
+    else{
+        while(x > 0)
+        {
+            vet[count] = x % 2;
+		    count++;
+		    x = x / 2;
+        }
+    }
+    for (i = count - 1 ; i >= 0 ; i--)
+    {
+        printf("%d", vet[i]) ;
+    }
+    return 0 ;
+}
+*/
