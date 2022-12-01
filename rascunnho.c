@@ -69,7 +69,8 @@ int main ()
     scanf ("%d", &operacao) ;
     if (operacao == 1)
     {
-      insereABB() ;
+      scanf ("%d", &x) ;
+      insereABB(x, raiz) ;
     }else if (operacao == 2){
       
     }
