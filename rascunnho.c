@@ -27,7 +27,7 @@ void inicializa (int c, tipoABB *arvoreAux)
 //Cria e retorna o endereço do Nó
 tipoABB* insereNo (int c)
 {
-    tipoABB* novo = (tipoABB*)calloc(1,sizeof(tipoABB));
+    tipoABB* novo = (tipoABB*)calloc(1, sizeof(tipoABB)) ;
     novo->chave = c;
     novo->esq = NULL;
     novo->dir = NULL;
@@ -46,7 +46,7 @@ void insereABB (int chave, tipoABB *Aux){
           else printf("Elemento Existente!");
 
 }
-
+/*
 void imprime (tipoABB *aux)
 {
     if (aux!= NULL)
@@ -55,7 +55,7 @@ void imprime (tipoABB *aux)
         imprime(aux->dir);
     if (aux->esq!= NULL)
         imprime(aux->esq);
-}
+}*/
 
 int main ()
 {
