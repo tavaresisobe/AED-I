@@ -1,6 +1,6 @@
 /* Programa: lab 4
    Autor: Gustavo Henrique Tavares Isobe -  RA: 158552 
-   Versao: 2.0 - 08/12/2022 - 19:29 h
+   Versao: 2.0 - 11/12/2022 - 13:48 h
 */
 
 // ##################### Bibliotecas Externas ##############################
@@ -57,7 +57,7 @@ void insereElementoFinal (tipoLDDE *listaAux)
 void insereJogada(tipoLDDE *listaAux)
 {
   int posicao ;
-  tipoElemento *a, *b, *c, *novo = (tipoElemento*) malloc(sizeof(tipoElemento));
+  tipoElemento *a, *b, *novo = (tipoElemento*) malloc(sizeof(tipoElemento));
   scanf("%d", &novo->info) ;
   scanf ("%d", &posicao) ;
   if (novo->info >= 1 && novo->info <= 9)
@@ -70,7 +70,7 @@ void insereJogada(tipoLDDE *listaAux)
       listaAux->primeiro = novo ;
       listaAux->tamanhoLista++ ;
     }else
-      if (posicao == 9)
+      if (posicao == listaAux->tamanhoLista - 1)
       {
         novo->prox = NULL ;
         novo->ant = listaAux->ultimo ;
@@ -78,15 +78,26 @@ void insereJogada(tipoLDDE *listaAux)
         listaAux->ultimo = novo ;
         listaAux->tamanhoLista++ ;
       }else 
-          if (posicao > 0 && posicao < 9)
+          if (posicao > 0 && posicao < listaAux->tamanhoLista)
           {
-            int aux = listaAux->tamanhoLista - 1 ;
+            int aux = 1 ;
             b = listaAux->primeiro->prox ;
-            while(aux != posicao)
+            a = b->ant ;
+            while(aux <= listaAux->tamanhoLista - 1)
             {
-              b = b->prox ;
+               if (aux == posicao)
+               {
+                  novo->prox = b ;
+                  novo->ant = a ;
+                  a->prox = novo ;
+                  b->ant = novo ;
+                  listaAux->tamanhoLista ++ ;
+                  break ;
+                }else
+                  a = b ;
+                  b = b->prox ;
+                  aux ++ ;
             }
-            
           }
   }else free (novo) ;
 }
@@ -117,8 +128,9 @@ int main ()
   for (i = 0 ; i < 10 ; i++)
   {
     insereElementoFinal(&listaDDE) ;
+     listarLista(&listaDDE) ;
   }
-  
+  printf ("\nInserindo jogada:") ;
   for (i = 0 ; i < 5 ; i++)
   {
     insereJogada(&listaDDE) ;
