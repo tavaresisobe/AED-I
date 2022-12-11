@@ -121,7 +121,7 @@ void verificaTripla(tipoLDDE *listaAux)
            free(a);
            free(b);
            free(c);
-           listaAux->tamanhoLista - 3 ;
+           listaAux->tamanhoLista = listaAux->tamanhoLista - 3 ;
            break ;
         }else
         if (listaAux->ultimo == c)
@@ -132,7 +132,7 @@ void verificaTripla(tipoLDDE *listaAux)
            free(a);
            free(b);
            free(c);
-           listaAux->tamanhoLista - 3 ;
+           listaAux->tamanhoLista = listaAux->tamanhoLista - 3 ;
            break ;
         }else
            aux = a->ant ;
@@ -142,7 +142,7 @@ void verificaTripla(tipoLDDE *listaAux)
            free(a);
            free(b);
            free(c);
-           listaAux->tamanhoLista - 3 ;
+           listaAux->tamanhoLista = listaAux->tamanhoLista - 3 ;
            break ;
       }else
         a = b ;
@@ -163,14 +163,13 @@ void ganhou(tipoLDDE *listaAux)
 
 void listarLista(tipoLDDE *listaAux)
 {
-  printf ("\n") ;
   tipoElemento *p ;
   p = listaAux->primeiro ;
   while (p)
   {
     printf ("%d ", p->info) ;
     p = p->prox ;
-  }
+  }printf ("\n") ;
 }
 
 // ############################ Principal ###################################
@@ -187,16 +186,65 @@ int main ()
     insereElementoFinal(&listaDDE) ;
   }
   listarLista(&listaDDE) ;
-  printf ("\nInserindo jogada:") ;
   for (i = 0 ; i < 5 ; i++)
   {
     insereJogada(&listaDDE) ;
     verificaTripla(&listaDDE) ;
     listarLista(&listaDDE) ;
   }
-  printf ("\n") ;
   ganhou(&listaDDE) ;
   return 0 ;
 }
 //1 3 2 8 7 6 4 9 5 3 5 2 5 0 4 0 5 0 5 0
 //1 3 2 8 7 6 4 9 5 3 4 0 3 0 8 0 9 0 1 9
+
+
+//as proximas funcoes nao estao dando runtime error, e eu nao descobri o motivo
+/*  
+void checarTripla2 (tipoLDDE *listaAux)
+{
+  tipoElemento *a, *b, *c, *aux, *aux_2 ;
+  a = listaAux->primeiro ;
+  b = a->prox ;
+  c = listaAux->ultimo ;
+  if (a->info + b->info + c->info == 10)
+  {
+    aux = b->prox ;
+    aux->ant = NULL ;
+    listaAux->primeiro = aux ;
+    aux_2 = c->ant ;
+    aux_2->prox == NULL ;
+    listaAux->ultimo = aux_2 ;
+    free(a) ;
+    free(b) ;
+    free(c) ;
+    listaAux->tamanhoLista = listaAux->tamanhoLista - 3 ;
+  }else
+    a = NULL ;
+    b = NULL ;
+    c = NULL ;
+}
+
+void checarTripla3 (tipoLDDE *listaAux)
+{
+  tipoElemento *a, *b, *c, *aux, *aux_2 ;
+  a = listaAux->primeiro ;
+  b = c->ant ;
+  c = listaAux->ultimo ;
+  if (a->info + b->info + c->info == 10)
+  {
+    aux = a->prox ;
+    aux->ant = NULL ;
+    listaAux->primeiro = aux ;
+    aux_2 = b->ant ;
+    aux_2->prox == NULL ;
+    listaAux->ultimo = aux_2 ;
+    free(a) ;
+    free(b) ;
+    free(c) ;
+    listaAux->tamanhoLista = listaAux->tamanhoLista - 3 ;
+  }else
+    a = NULL ;
+    b = NULL ;
+    c = NULL ;
+}*/
