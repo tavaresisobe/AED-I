@@ -1,6 +1,6 @@
 /* Programa: lab 4
    Autor: Gustavo Henrique Tavares Isobe -  RA: 158552 
-   Versao: 2.0 - 11/12/2022 - 13:48 h
+   Versao: 2.0 - 08/12/2022 - 19:29 h
 */
 
 // ##################### Bibliotecas Externas ##############################
@@ -102,7 +102,54 @@ void insereJogada(tipoLDDE *listaAux)
   }else free (novo) ;
 }
 
-
+void verificaTripla(tipoLDDE *listaAux)
+{
+  tipoElemento *a, *b, *c, *aux, *aux_2 ;
+  a = listaAux->primeiro ;
+  b = a->prox ;
+  c = b->prox ;
+  if (listaAux->tamanhoLista >= 3)
+  {
+    while (c)
+    {
+      if (a->info + b->info + c->info == 10)
+      {
+        if (listaAux->primeiro == a)
+        {
+           aux = c->prox ;
+           listaAux->primeiro = aux ;
+           aux->ant = NULL ;
+           free(a);
+           free(b);
+           free (c);
+           listaAux->tamanhoLista - 3 ;
+        }else
+        if (listaAux->ultimo == c)
+        {
+           aux = a->ant ;
+           listaAux->ultimo = aux ;
+           aux->prox = NULL ;
+           free(a);
+           free(b);
+           free (c);
+           listaAux->tamanhoLista - 3 ;
+        }else
+           aux = a->ant ;
+           aux_2 = c->prox ;
+           aux->prox = aux_2 ;
+           aux_2->ant = aux ;
+           free(a);
+           free(b);
+           free (c);
+           listaAux->tamanhoLista - 3 ;
+      }else
+        a = b ;
+        b = c ;
+        c = c->prox ;
+         
+    }
+  }
+}
 
 void listarLista(tipoLDDE *listaAux)
 {
@@ -128,16 +175,17 @@ int main ()
   for (i = 0 ; i < 10 ; i++)
   {
     insereElementoFinal(&listaDDE) ;
-     listarLista(&listaDDE) ;
   }
+  listarLista(&listaDDE) ;
   printf ("\nInserindo jogada:") ;
   for (i = 0 ; i < 5 ; i++)
   {
     insereJogada(&listaDDE) ;
+    verificaTripla(&listaDDE) ;
     listarLista(&listaDDE) ;
   }
   
   return 0 ;
 }
-
+//1 3 2 8 7 6 4 9 5 3
 //1 3 2 8 7 6 4 9 5 3 4 0 3 0 8 0 9 0 1 9
