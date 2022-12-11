@@ -1,6 +1,6 @@
 /* Programa: lab 4
    Autor: Gustavo Henrique Tavares Isobe -  RA: 158552 
-   Versao: 1.0 - 11/12/2022 - 14:50 h
+   Versao: 2.0 - 08/12/2022 - 19:29 h
 */
 
 // ##################### Bibliotecas Externas ##############################
@@ -110,8 +110,7 @@ void verificaTripla(tipoLDDE *listaAux)
   c = b->prox ;
   if (listaAux->tamanhoLista >= 3)
   {
-    while (c)
-    {
+    do{
       if (a->info + b->info + c->info == 10)
       {
         if (listaAux->primeiro == a)
@@ -121,8 +120,9 @@ void verificaTripla(tipoLDDE *listaAux)
            aux->ant = NULL ;
            free(a);
            free(b);
-           free (c);
+           free(c);
            listaAux->tamanhoLista - 3 ;
+           break ;
         }else
         if (listaAux->ultimo == c)
         {
@@ -131,8 +131,9 @@ void verificaTripla(tipoLDDE *listaAux)
            aux->prox = NULL ;
            free(a);
            free(b);
-           free (c);
+           free(c);
            listaAux->tamanhoLista - 3 ;
+           break ;
         }else
            aux = a->ant ;
            aux_2 = c->prox ;
@@ -140,15 +141,24 @@ void verificaTripla(tipoLDDE *listaAux)
            aux_2->ant = aux ;
            free(a);
            free(b);
-           free (c);
+           free(c);
            listaAux->tamanhoLista - 3 ;
+           break ;
       }else
         a = b ;
         b = c ;
         c = c->prox ;
          
-    }
+    }while (c) ;
   }
+}
+
+void ganhou(tipoLDDE *listaAux)
+{
+    if (listaAux->tamanhoLista == 0)
+        printf ("ganhou") ;
+    else
+        printf ("perdeu") ;
 }
 
 void listarLista(tipoLDDE *listaAux)
@@ -184,8 +194,9 @@ int main ()
     verificaTripla(&listaDDE) ;
     listarLista(&listaDDE) ;
   }
-  
+  printf ("\n") ;
+  ganhou(&listaDDE) ;
   return 0 ;
 }
-//1 3 2 8 7 6 4 9 5 3
+//1 3 2 8 7 6 4 9 5 3 5 2 5 0 4 0 5 0 5 0
 //1 3 2 8 7 6 4 9 5 3 4 0 3 0 8 0 9 0 1 9
