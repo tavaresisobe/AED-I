@@ -248,3 +248,5 @@ void checarTripla3 (tipoLDDE *listaAux)
     b = NULL ;
     c = NULL ;
 }*/
+
+https://replit.com/@GabrielPinhei14/Lab-3-LDE?v=1
