@@ -161,3 +161,95 @@ int main ()
   }
   return 0 ;
 }
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX 20
+
+struct noArvoreBB {
+    char nome;
+    char sexo;
+    char ancestral;
+    int nascimento;
+    struct noArvoreBB* esq;
+    struct noArvoreBB* dir;
+};
+typedef struct noArvoreBB tipoABB;
+
+void inicializa (char nome[MAX], char sexo, int data, tipoABB *arvoreAux)
+{
+    arvoreAux->nome = nome;
+    arvoreAux->sexo = sexo;
+    arvoreAux->nascimento = data;
+    arvoreAux->ancestral = NULL;
+    arvoreAux->esq = NULL;
+    arvoreAux->dir=NULL;
+}
+
+tipoABB* insereNo(char nome[MAX], char sexo, int data, char ancestral[MAX]){
+    tipoABB* novo = () malloc(sizeof(tipoABB));
+    novo->nome = nome;
+    novo->sexo = sexo;
+    novo->nascimento = data;
+    novo->ancestral = ancestral;
+    novo->dir = NULL;
+    novo->esq= NULL;
+    return novo;
+}
+
+void insereABB (char nome[MAX], char sexo, int data, char ancestral[MAX], tipoABB *Aux){
+    if (chave < Aux->chave){
+        if (Aux->esq == NULL)
+            Aux->esq = insereNo (chave);
+        else insereABB (chave, Aux->esq);
+    }else if (chave > Aux->chave)
+            if (Aux->dir == NULL)
+                Aux->dir = insereNo (chave);
+            else insereABB (chave, Aux->dir);
+    else printf("Elemento Existente!\n");
+}
+
+void buscaNo(char ancestral[MAX], tipoABB *Aux)
+{
+    if (Aux)
+    {
+        while(strcmp (ancestral,Aux->nome) != 0);
+        {
+            
+        }
+    }
+}
+
+int main ()
+{
+    tipoABB *raiz = (tipoABB*)malloc(sizeof(tipoABB));
+    int x, op, data ;
+    char nome[MAX], ancestral[MAX], sexo[2] ; 
+    fgets(nome,10, stdin) ;
+    scanf ("%s", &sexo ) ;
+    scanf ("%d", &data);
+    inicializa(nome, sexo, data, raiz) ;
+    scanf ("%d", x) ;
+    while (x > 0)
+    {
+        scanf ("%d", &op) ;
+        if (op == 1) //inserir
+        {
+            fgets(nome,10, stdin) ;
+            scanf ("%s", &sexo ) ;
+            scanf ("%d", &data);
+            fgets(ancestral,10, stdin) ;
+            insereABB(nome, sexo, data, ancestral, raiz) ;
+        }else
+        if (op == 2) //remover
+        {
+            
+        }
+        x-- ;
+    }
+    
+    
+    return 0 ;
+}
