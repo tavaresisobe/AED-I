@@ -1,6 +1,6 @@
 /* Programa: lab 4
    Autor: Gustavo Henrique Tavares Isobe -  RA: 158552 
-   Versao: 3.0 - 20/12/2022 - 20:02 h
+   Versao: 1.0 - 20/12/2022 - 20:24 h
 */
 
 // ##################### Bibliotecas Externas ##############################
@@ -272,10 +272,10 @@ int main ()
         verificaTripla(&listaDDE) ;
     if (listaDDE.tamanhoLista > 3)
     {
-        verificaFimInicio(&listaDDE) ;
+        verificaInicioFim(&listaDDE) ;
     }if (listaDDE.tamanhoLista > 3)
     {
-        verificaInicioFim(&listaDDE) ;
+        verificaFimInicio(&listaDDE) ;
     }
     if (listaDDE.tamanhoLista > 3)
     {
